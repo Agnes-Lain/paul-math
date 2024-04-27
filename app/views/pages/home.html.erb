@@ -1,2 +1,19 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1> ♥️ Les Exercices de Math pour Paul ♥️ </h1>
+<%# nav bar to choose excercises %>
+<div data-controller="calculate">
+  <nav>
+    <button data-action="click->calculate#addition">Addition</button>
+    <button data-action="click->calculate#soustraction">Soustraction</button>
+    <button>Multiplication</button>
+    <button>Division</button>
+    <button>Mixed Exercises</button>
+  </nav>
+  <hr>
+  <div class=math-area >
+    <ul data-calculate-target="calculateZone">
+
+    </ul>
+    <input class=active type="submit" value="Soumettre" data-action="click->calculate#checkAnswer">
+  </div>
+
+</div>
