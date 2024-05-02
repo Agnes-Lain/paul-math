@@ -8,61 +8,40 @@ export default class extends Controller {
   addition () {
     this.calculateZoneTarget.innerHTML=""
     for (let i=0; i < 10 ;i++) {
-      const a = Math.floor(Math.random() * 100);
-      const b = Math.floor(Math.random() * 100);
-      let answer = a + b
-      this.calculateZoneTarget.innerHTML +=
-      `<li data-calculate-target="showResult">
-          ${a} + ${b} = <input type="text" id=${answer} name="response" placeholder="0" data-calculate-target="answer" >
-          </li>`
-        }
+      let element = math(100, 10, "+")
+      this.calculateZoneTarget.innerHTML += element
+    }
   }
 
   soustraction () {
     this.calculateZoneTarget.innerHTML=""
     for (let i=0; i < 10 ;i++) {
-      const a = Math.floor(Math.random() * 100);
-      const b = Math.floor(Math.random() * 100);
-      if (a >= b) {
-        let answer = a - b
-        this.calculateZoneTarget.innerHTML +=
-        `<li data-calculate-target="showResult">
-        ${a} - ${b} = <input type="text" id=${answer} name="response" placeholder="0" data-calculate-target="answer" >
-        </li>`
-      } else {
-        let answer = b - a
-        this.calculateZoneTarget.innerHTML +=
-        `<li data-calculate-target="showResult">
-        ${b} - ${a} = <input type="text" id=${answer} name="response" placeholder="0" data-calculate-target="answer" >
-        </li>`
-      }
-
+      let element = math(100, 10, "-")
+      this.calculateZoneTarget.innerHTML += element
     }
   }
 
   multiplication () {
     this.calculateZoneTarget.innerHTML=""
     for (let i=0; i < 10 ;i++) {
-      const a = Math.floor(Math.random() * 9 + 1);
-      const b = Math.floor(Math.random() * 9 + 1);
-      let answer = a * b
-      this.calculateZoneTarget.innerHTML +=
-      `<li data-calculate-target="showResult">
-        ${a} * ${b} =  <input type="text" id=${answer} name="response" placeholder="0" data-calculate-target="answer" >
-      </li>`
+      let element = math(10, 10, "*")
+      this.calculateZoneTarget.innerHTML += element
     }
   }
 
   division () {
     this.calculateZoneTarget.innerHTML=""
     for (let i=0; i < 10 ;i++) {
-      const a = Math.floor(Math.random() * 9 + 1);
-      const b = Math.floor(Math.random() * 9 + 1);
-      let answer = a * b
-      this.calculateZoneTarget.innerHTML +=
-      `<li data-calculate-target="showResult">
-        ${answer} / ${a} =  <input type="text" id=${b} name="response" placeholder="0" data-calculate-target="answer" >
-      </li>`
+      let element = math(10, 10, "/")
+      this.calculateZoneTarget.innerHTML += element
+    }
+  }
+
+  mixed () {
+    this.calculateZoneTarget.innerHTML=""
+    for (let i=0; i < 10 ;i++) {
+      let element = math(10, 10, "mixed")
+      this.calculateZoneTarget.innerHTML += element
     }
   }
 
@@ -82,22 +61,34 @@ export default class extends Controller {
   }
 }
 
-// function math(num_max, quantity, formula) {
-//   for (let i=0; i < quantity ;i++) {
-//     const a = Math.floor(Math.random() * num_max);
-//     const b = Math.floor(Math.random() * num_max);
-//     let answer = 0
-//     switch(formula) {
-//       case '+':
-//         answer = a + b
-//       case '-':
-//         a >= b ? answer = a - b : answer = b - a
-//       case '*':
-//         answer = a * b
-//       case "/":
-//         a >= b ? answer = a / b : answer = b / a
-//     }
-//     return [a, b, answer]
-//   }
-
-// }
+function math(num_max, quantity, formula) {
+    let a = Math.floor(Math.random() * num_max);
+    let b = Math.floor(Math.random() * num_max);
+    let answer = 0
+    const formula_arr = ["+", "-", "*", "/"];
+    if (formula === "mixed") { formula = formula_arr[Math.floor(Math.random() * formula_arr.length)]};
+    switch(formula) {
+      case '+':
+        answer = a + b
+        break
+      case '-':
+        if (a >= b) {
+          answer = a - b
+        } else {
+          answer = b - a
+          a = b
+          b = a - answer
+        }
+        break
+      case '*':
+        answer = a * b
+        break
+      case "/":
+        answer = a;
+        a = answer * b;
+        break
+      default:
+        console.log("missing formula")
+    }
+    return  `<li data-calculate-target="showResult"> ${a} ${formula} ${b} =  <input type="text" id=${answer} name="response" data-calculate-target="answer" ></li>`
+  }
