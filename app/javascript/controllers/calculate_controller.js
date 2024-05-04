@@ -8,7 +8,7 @@ export default class extends Controller {
   addition () {
     this.calculateZoneTarget.innerHTML=""
     for (let i=0; i < 10 ;i++) {
-      let element = math(100, 10, "+")
+      let element = math(100, "+")
       this.calculateZoneTarget.innerHTML += element
     }
   }
@@ -16,7 +16,7 @@ export default class extends Controller {
   soustraction () {
     this.calculateZoneTarget.innerHTML=""
     for (let i=0; i < 10 ;i++) {
-      let element = math(100, 10, "-")
+      let element = math(100, "-")
       this.calculateZoneTarget.innerHTML += element
     }
   }
@@ -24,7 +24,7 @@ export default class extends Controller {
   multiplication () {
     this.calculateZoneTarget.innerHTML=""
     for (let i=0; i < 10 ;i++) {
-      let element = math(10, 10, "*")
+      let element = math(10, "*")
       this.calculateZoneTarget.innerHTML += element
     }
   }
@@ -32,7 +32,7 @@ export default class extends Controller {
   division () {
     this.calculateZoneTarget.innerHTML=""
     for (let i=0; i < 10 ;i++) {
-      let element = math(10, 10, "/")
+      let element = math(10, "/")
       this.calculateZoneTarget.innerHTML += element
     }
   }
@@ -40,7 +40,7 @@ export default class extends Controller {
   mixed () {
     this.calculateZoneTarget.innerHTML=""
     for (let i=0; i < 10 ;i++) {
-      let element = math(10, 10, "mixed")
+      let element = math(10, "mixed")
       this.calculateZoneTarget.innerHTML += element
     }
   }
@@ -61,7 +61,7 @@ export default class extends Controller {
   }
 }
 
-function math(num_max, quantity, formula) {
+function math(num_max, formula) {
     let a = Math.floor(Math.random() * num_max);
     let b = Math.floor(Math.random() * num_max);
     let answer = 0
